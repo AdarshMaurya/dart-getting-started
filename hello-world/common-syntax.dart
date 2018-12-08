@@ -49,6 +49,21 @@ void main() {
   dartEncapsulation();
   dartCustomLibrary();
   dartSyncMethod();
+  dartAsyncMethod();
+
+}
+
+void dartAsyncMethod() {
+  File file = new File( Directory.current.path+"/data/contact.txt");
+
+  // returns a future, this is Async method
+  Future<String> future = file.readAsString();
+
+  // once file is read , call back method is invoked
+  future.then((data)=>print(data));
+
+  // this get printed first, showing fileReading is non blocking or async
+  print("End of main");
 
 }
 
