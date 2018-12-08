@@ -1,3 +1,4 @@
+import 'dart:collection';
 import 'dart:core';
 import 'dart:math';
 import 'dart:mirrors';
@@ -32,6 +33,136 @@ void main() {
   dartObjectStateBehaviorIdentity();
   dartCascadeOperator();
   dartStringManipulation();
+  dartCollectionList();
+  dartCollectionSet();
+  dartCollectionMap();
+  dartCollectionQueue();
+}
+
+void dartCollectionQueue() {
+  Queue queue = new Queue();
+  print("queue Default implementation ${queue.runtimeType}");
+  queue.add(10);
+  queue.add(20);
+  queue.add(30);
+  queue.add(40);
+
+  for(var no in queue){
+    print(no);
+  }
+  //addAll()
+  print("queue Default implementation ${queue.runtimeType}");
+  queue.addAll([10,12,13,14]);
+  for(var no in queue){
+    print(no);
+  }
+
+  //addFirst()
+  Queue numQ = new Queue();
+  numQ.addAll([100,200,300]);
+  print("Printing Q.. ${numQ}");
+  numQ.addFirst(400);
+  print("Printing Q after addFirst(400).. ${numQ}");
+
+  //addLast()
+  numQ.addLast(500);
+  print("Printing Q afte addLast(500).. ${numQ}");
+}
+
+void dartCollectionMap() {
+  //A Map is a dynamic collection. In other words, Maps can grow and shrink at runtime.
+  // The Map class in the dart:core library provides support for the same.
+  var details = new Map();
+  details['Usrname']='admin';
+  details['Password']='admin@123';
+  print(details);
+
+  //HasMap
+  var accounts = new HashMap();
+  accounts.addAll({'dept':'HR','email':'tom@xyz.com'});
+  print('Map after adding  entries :${accounts}');
+
+  accounts['dept'] = 'HR';
+  accounts['name'] = 'Tom';
+  accounts['email'] = 'tom@xyz.com';
+  print('Map after adding  entries :${accounts}');
+  accounts.remove('dept');
+  print('Map after removing  entry :${accounts}');
+  accounts.clear();
+  print('Map after clearing entries :${accounts}');
+
+}
+
+void dartCollectionSet() {
+  Set numberSet = new  Set();
+  numberSet.add(100);
+  numberSet.add(20);
+  numberSet.add(5);
+  numberSet.add(60);
+  numberSet.add(70);
+  print("numberSet Default implementation :${numberSet.runtimeType}");
+  // all elements are retrieved in the order in which they are inserted
+  for(var no in numberSet) {
+    print(no);
+  }
+
+  Set numberSet2 = new Set.from([12,13,14]);
+  print("numberSet2 Default implementation :${numberSet2.runtimeType}");
+  // all elements are retrieved in the order in which they are inserted
+  for(var no in numberSet2) {
+    print(no);
+  }
+
+  //Hast Set
+  Set numberHashSet = new  HashSet();
+  numberHashSet.add(100);
+  numberHashSet.add(20);
+  numberHashSet.add(5);
+  numberHashSet.add(60);
+  numberHashSet.add(70);
+  print("numberHashSet Default implementation :${numberHashSet.runtimeType}");
+  for(var no in numberHashSet){
+    print(no);
+  }
+
+  //adding multiple values to HashSet
+  numberHashSet.addAll([100,200,300]);
+  print("numberHashSet Default implementation :${numberSet.runtimeType}");
+  for(var no in numberHashSet){
+    print(no);
+  }
+
+  print("Printing hashet.. ${numberHashSet}");
+  numberHashSet.remove(100);
+  print("Printing  after remove(100) numberHashSet.. ${numberHashSet}");
+  numberHashSet.clear();
+  print("Printing after clear() numberHashSet.. ${numberHashSet}");
+
+}
+
+void dartCollectionList() {
+  //dart does not support array
+  // dart:core provides the List class
+
+  List logTypes = new List();
+  logTypes.add("WARNING");
+  logTypes.add("ERROR");
+  logTypes.add("INFO");
+
+  //iterating across list
+  for(String type in logTypes){
+    print("logTypes: ${type}");
+  }
+
+  //printing size of the list
+  print("logTypes size: ${logTypes.length}");
+
+  //remove "Warning"
+  logTypes.remove("Warning");
+
+  print("size after removing.");
+  print(logTypes.length);
+
 }
 
 void dartStringManipulation() {
