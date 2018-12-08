@@ -3,6 +3,7 @@ import 'dart:core';
 import 'dart:math';
 import 'dart:mirrors';
 import 'Foo.dart';
+import 'encapsulate.dart' as web;
 
 void main() {
   dartTypecheck();
@@ -45,6 +46,12 @@ void main() {
   dartThrowingException();
   dartCustomException();
   dartTypedef();
+  dartEncapsulation();
+}
+
+void dartEncapsulation() {
+  //web._log("hello from webloggerlib"); //_log is a private method
+  web.log("hello from webloggerlib");
 }
 
 void dartTypedef() {
