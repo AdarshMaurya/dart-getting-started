@@ -25,6 +25,26 @@ void main() {
   dartGetterAccessorSetterMutators();
   dartClassInheritance();
   dartClassMultiLevelClassInheritance();
+  dartInheritanceMethodOverriding();
+}
+
+void dartInheritanceMethodOverriding() {
+  Children c = new Children();
+  c.print_name("Child 1");
+}
+
+class Children extends Parent{
+
+  @override
+  void print_name(String name) {
+    print("Overriden Parent's name, with Children name as ${name}");
+  }
+}
+
+class Parent {
+  void print_name(String name){
+    print("Name of Parent: ${name}");
+  }
 }
 
 void dartClassMultiLevelClassInheritance() {
