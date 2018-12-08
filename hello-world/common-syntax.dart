@@ -138,6 +138,7 @@ void main() {
   reflect_InstanceMethods(lib, clsToSearch);
   f1();
   f2();
+  f3();
 }
 
 bool checkIf_classAvailableInlibrary(Symbol libraryName, Symbol className) {
@@ -193,3 +194,16 @@ f2(){
   });
 }
 
+enum Status {
+  none,
+  running,
+  stopped,
+  paused
+}
+
+f3(){
+  print(Status.values);
+  Status.values.forEach((v) => print('value: $v, index: ${v.index}'));
+  print('running: ${Status.running}, ${Status.running.index}');
+  print('running index: ${Status.values[1]}');
+}
