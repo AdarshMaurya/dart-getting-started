@@ -5,7 +5,6 @@ import 'dart:mirrors';
 import 'Foo.dart';
 
 void main() {
-
   dartTypecheck();
   dartFinalConst();
   dartLoop();
@@ -39,17 +38,105 @@ void main() {
   dartCollectionQueue();
   dartCollectionIterator();
   dartGenericTypeSafeCollection();
+  dartExceptionsOnBlock();
+  dartExceptionsCatchBlock();
+  dartExceptionsOnCatchBlock();
+  dartExceptionsOnCatchFinallyBlock();
+  dartThrowingException();
+  dartCustomException();
+}
+
+void dartCustomException() {
+  try {
+    withdraw_amt(-1);
+  }
+  catch(e) {
+    print(e.errMsg());
+  }
+}
+
+void withdraw_amt(int amt) {
+  if (amt <= 0) {
+    throw new AmtException();
+  }
+}
+
+class AmtException implements Exception {
+  String errMsg() => 'Amount should be greater than zero';
+}
+
+void dartThrowingException() {
+  try {
+    test_age(-2);
+  } catch (e) {
+    print('Age cannot be negative');
+  }
+}
+
+void test_age(int age) {
+  if (age < 0) {
+    throw new FormatException();
+  }
+}
+
+void dartExceptionsOnCatchFinallyBlock() {
+  int x = 12;
+  int y = 0;
+  int res;
+
+  try {
+    res = x ~/ y;
+  } on IntegerDivisionByZeroException catch (e) {
+    print(e);
+  } finally {
+    print('Finally block executed');
+  }
+}
+
+void dartExceptionsOnCatchBlock() {
+  int x = 12;
+  int y = 0;
+  int res;
+
+  try {
+    res = x ~/ y;
+  } on IntegerDivisionByZeroException catch (e) {
+    print(e);
+  }
+}
+
+void dartExceptionsCatchBlock() {
+  int x = 12;
+  int y = 0;
+  int res;
+
+  try {
+    res = x ~/ y;
+  } catch (e) {
+    print(e);
+  }
+}
+
+void dartExceptionsOnBlock() {
+  int x = 12;
+  int y = 0;
+  int res;
+
+  try {
+    res = x ~/ y;
+  } on IntegerDivisionByZeroException {
+    print('Cannot divide by zero');
+  }
 }
 
 void dartGenericTypeSafeCollection() {
-
   //All Dart collections support type-safety implementation via generics.
   // A pair of angular brackets containing the data type is used to declare a
   // type-safe collection.
 
   //Generic List
 
-  List <String> logTypes = new List <String>();
+  List<String> logTypes = new List<String>();
   logTypes.add("WARNING");
   logTypes.add("ERROR");
   logTypes.add("INFO");
@@ -64,22 +151,22 @@ void dartGenericTypeSafeCollection() {
 
   //Generic Set
 
-  Set <int>numberSet = new  Set<int>();
+  Set<int> numberSet = new Set<int>();
   numberSet.add(100);
   numberSet.add(20);
   numberSet.add(5);
   numberSet.add(60);
   numberSet.add(70);
 
-   //numberSet.add("Tom");
+  //numberSet.add("Tom");
   // compilation error;
   print("Genric Set Default implementation  :${numberSet.runtimeType}");
 
-  for(var no in numberSet) {
+  for (var no in numberSet) {
     print(no);
   }
 
- //Generic Queue
+  //Generic Queue
   Queue<int> queue = new Queue<int>();
   print("Generic Queue Default implementation ${queue.runtimeType}");
   queue.addLast(10);
@@ -88,16 +175,14 @@ void dartGenericTypeSafeCollection() {
   queue.addLast(40);
   queue.removeFirst();
 
-
-  for(int no in queue){
+  for (int no in queue) {
     print(no);
   }
 
   //Generic Map
-  Map <String,String>map={'name':'Tom','Id':'E1001'};
+  Map<String, String> map = {'name': 'Tom', 'Id': 'E1001'};
   print("Generic map Default implementation ${map.runtimeType}");
   print('Map :${map}');
-
 }
 
 void dartCollectionIterator() {
@@ -105,13 +190,12 @@ void dartCollectionIterator() {
   // Every collection has an iterator property. This property returns an iterator
   // that points to the objects in the collection.
   Queue numQ = new Queue();
-  numQ.addAll([100,200,300]);
+  numQ.addAll([100, 200, 300]);
   Iterator iter = numQ.iterator;
 
-  while(iter.moveNext()) {
+  while (iter.moveNext()) {
     print(iter.current);
   }
-
 }
 
 void dartCollectionQueue() {
@@ -122,19 +206,19 @@ void dartCollectionQueue() {
   queue.add(30);
   queue.add(40);
 
-  for(var no in queue){
+  for (var no in queue) {
     print(no);
   }
   //addAll()
   print("queue Default implementation ${queue.runtimeType}");
-  queue.addAll([10,12,13,14]);
-  for(var no in queue){
+  queue.addAll([10, 12, 13, 14]);
+  for (var no in queue) {
     print(no);
   }
 
   //addFirst()
   Queue numQ = new Queue();
-  numQ.addAll([100,200,300]);
+  numQ.addAll([100, 200, 300]);
   print("Printing Q.. ${numQ}");
   numQ.addFirst(400);
   print("Printing Q after addFirst(400).. ${numQ}");
@@ -148,13 +232,13 @@ void dartCollectionMap() {
   //A Map is a dynamic collection. In other words, Maps can grow and shrink at runtime.
   // The Map class in the dart:core library provides support for the same.
   var details = new Map();
-  details['Usrname']='admin';
-  details['Password']='admin@123';
+  details['Usrname'] = 'admin';
+  details['Password'] = 'admin@123';
   print(details);
 
   //HasMap
   var accounts = new HashMap();
-  accounts.addAll({'dept':'HR','email':'tom@xyz.com'});
+  accounts.addAll({'dept': 'HR', 'email': 'tom@xyz.com'});
   print('Map after adding  entries :${accounts}');
 
   accounts['dept'] = 'HR';
@@ -165,11 +249,10 @@ void dartCollectionMap() {
   print('Map after removing  entry :${accounts}');
   accounts.clear();
   print('Map after clearing entries :${accounts}');
-
 }
 
 void dartCollectionSet() {
-  Set numberSet = new  Set();
+  Set numberSet = new Set();
   numberSet.add(100);
   numberSet.add(20);
   numberSet.add(5);
@@ -177,33 +260,33 @@ void dartCollectionSet() {
   numberSet.add(70);
   print("numberSet Default implementation :${numberSet.runtimeType}");
   // all elements are retrieved in the order in which they are inserted
-  for(var no in numberSet) {
+  for (var no in numberSet) {
     print(no);
   }
 
-  Set numberSet2 = new Set.from([12,13,14]);
+  Set numberSet2 = new Set.from([12, 13, 14]);
   print("numberSet2 Default implementation :${numberSet2.runtimeType}");
   // all elements are retrieved in the order in which they are inserted
-  for(var no in numberSet2) {
+  for (var no in numberSet2) {
     print(no);
   }
 
   //Hast Set
-  Set numberHashSet = new  HashSet();
+  Set numberHashSet = new HashSet();
   numberHashSet.add(100);
   numberHashSet.add(20);
   numberHashSet.add(5);
   numberHashSet.add(60);
   numberHashSet.add(70);
   print("numberHashSet Default implementation :${numberHashSet.runtimeType}");
-  for(var no in numberHashSet){
+  for (var no in numberHashSet) {
     print(no);
   }
 
   //adding multiple values to HashSet
-  numberHashSet.addAll([100,200,300]);
+  numberHashSet.addAll([100, 200, 300]);
   print("numberHashSet Default implementation :${numberSet.runtimeType}");
-  for(var no in numberHashSet){
+  for (var no in numberHashSet) {
     print(no);
   }
 
@@ -212,7 +295,6 @@ void dartCollectionSet() {
   print("Printing  after remove(100) numberHashSet.. ${numberHashSet}");
   numberHashSet.clear();
   print("Printing after clear() numberHashSet.. ${numberHashSet}");
-
 }
 
 void dartCollectionList() {
@@ -225,7 +307,7 @@ void dartCollectionList() {
   logTypes.add("INFO");
 
   //iterating across list
-  for(String type in logTypes){
+  for (String type in logTypes) {
     print("logTypes: ${type}");
   }
 
@@ -237,7 +319,6 @@ void dartCollectionList() {
 
   print("size after removing.");
   print(logTypes.length);
-
 }
 
 void dartStringManipulation() {
@@ -246,24 +327,22 @@ void dartStringManipulation() {
   int num = -8;
 
   print(num.toString());
-  print(num.toString().substring(0,1));
+  print(num.toString().substring(0, 1));
 
   print(num.toRadixString(2));
   print(num.abs());
   print(num.toUnsigned(2));
   print(num.round());
-
 }
 
 void dartCascadeOperator() {
-
   // Every time a function is called, a reference to the object is required.
   // The cascade operator can be used as a shorthand in cases where
   // there is a sequence of invocations.
 
   new ObjectCascade()
-      ..reference_to_method_one()
-      ..reference_to_method_two();
+    ..reference_to_method_one()
+    ..reference_to_method_two();
 }
 
 class ObjectCascade {
@@ -274,7 +353,6 @@ class ObjectCascade {
   reference_to_method_two() {
     print("This is a test method 2");
   }
-
 }
 
 void dartObjectStateBehaviorIdentity() {
@@ -288,7 +366,7 @@ void dartObjectStateBehaviorIdentity() {
   print("Object Identity: ${obj.hashCode}");
   obj2.behavior(true);
 
-  if(obj != obj2 ){
+  if (obj != obj2) {
     print("Compare obj and obj2 :");
     print("obj = ${obj.hashCode}");
     print("obj2 = ${obj2.hashCode}");
@@ -300,7 +378,7 @@ void dartObjectStateBehaviorIdentity() {
   obj3.setHasCode(obj3.hashCode);
   obj3.behavior(true);
 
-  if(obj2 == obj3 ){
+  if (obj2 == obj3) {
     print("Compare obj2 and obj3 :");
     print("obj2 = ${obj2.hashCode}");
     print("obj3 = ${obj3.hashCode}");
@@ -311,11 +389,10 @@ void dartObjectStateBehaviorIdentity() {
 }
 
 class ObjectBluePrint {
-
   bool state;
   int objIdentity;
 
-  void behavior(bool state){
+  void behavior(bool state) {
     print("Lets change state");
     print("state of boolean state: ${this.state}");
     this.state = state;
@@ -330,8 +407,6 @@ class ObjectBluePrint {
   void setHasCode(int hashCode) {
     objIdentity = hashCode;
   }
-
-
 }
 
 void dartSuperKeyword() {
@@ -343,8 +418,7 @@ void dartSuperKeyword() {
   c.print_name("Super Child");
 }
 
-class SuperChild extends SuperParent{
-
+class SuperChild extends SuperParent {
   @override
   void print_name(String name) {
     print("Overriding SuperParent print_name:  ${name}");
@@ -355,22 +429,23 @@ class SuperChild extends SuperParent{
 
 class SuperParent {
   String msg = "message from the parent class.";
-  void print_name(String name){
+
+  void print_name(String name) {
     print("Print the Parent Name ${name}");
   }
 }
 
 void dartStaticKeyword() {
   // Initialize the static variable
-  StaticMem.num =12;
+  StaticMem.num = 12;
   // Invoke the static method
   StaticMem.disp();
-
 }
 
 class StaticMem {
   static int num;
-  static disp(){
+
+  static disp() {
     print("The value of num is ${StaticMem.num}");
   }
 }
@@ -380,8 +455,7 @@ void dartInheritanceMethodOverriding() {
   c.print_name("Child 1");
 }
 
-class Children extends Parent{
-
+class Children extends Parent {
   @override
   void print_name(String name) {
     print("Overriden Parent's name, with Children name as ${name}");
@@ -389,7 +463,7 @@ class Children extends Parent{
 }
 
 class Parent {
-  void print_name(String name){
+  void print_name(String name) {
     print("Name of Parent: ${name}");
   }
 }
@@ -400,21 +474,22 @@ void dartClassMultiLevelClassInheritance() {
 }
 
 class Leaf extends Child {
-Leaf(){
-  print("Leaf class constructor invoked");
-}
+  Leaf() {
+    print("Leaf class constructor invoked");
+  }
 }
 
-class Child extends Root{
-  Child(){
+class Child extends Root {
+  Child() {
     print("Child class constructor invoked");
   }
 }
 
 class Root {
-  Root(){
+  Root() {
     print("Root class constructor invoked");
   }
+
   void print_name() {
     print("Calling from the Root Class");
   }
@@ -425,9 +500,7 @@ void dartClassInheritance() {
   obj.cal_area();
 }
 
-class Circle extends Shape{
-
-}
+class Circle extends Shape {}
 
 class Shape {
   void cal_area() {
@@ -448,32 +521,31 @@ void dartGetterAccessorSetterMutators() {
   s1.stud_age = 6;
   print(s1.name);
   print(s1.age);
-
 }
 
 class Student {
- String name;
- int  age;
+  String name;
+  int age;
 
- void set stud_age(int age){
-   if(age <= 5){
-     print("Age should be greater than 5: ${age}");
-   }else{
-     this.age = age;
-   }
- }
+  void set stud_age(int age) {
+    if (age <= 5) {
+      print("Age should be greater than 5: ${age}");
+    } else {
+      this.age = age;
+    }
+  }
 
- int get stud_age{
-   return age;
- }
+  int get stud_age {
+    return age;
+  }
 
- void set stud_name(String name){
-   this.name = name;
- }
+  void set stud_name(String name) {
+    this.name = name;
+  }
 
- String get stud_name{
-   return name;
- }
+  String get stud_name {
+    return name;
+  }
 }
 
 void dartThisInstance() {
@@ -482,7 +554,8 @@ void dartThisInstance() {
 
 class Bike {
   String engine;
-  Bike(String engine){
+
+  Bike(String engine) {
     this.engine = engine;
     print("The engine is: ${engine}");
   }
@@ -493,16 +566,13 @@ void dartNamedClassConstructor() {
 }
 
 class Lorry {
-
-  Lorry.namedConstructor(String engine){
+  Lorry.namedConstructor(String engine) {
     print("The engine is: ${engine}");
   }
 
-  Lorry(){
+  Lorry() {
     print("Non-parameterized constructor invoked");
   }
-
-
 }
 
 void dartClassConstructor() {
@@ -510,12 +580,10 @@ void dartClassConstructor() {
 }
 
 class Truck {
-  Truck(String engine){
+  Truck(String engine) {
     print(engine);
   }
 }
-
-
 
 void dartClass() {
   Car c = new Car();
@@ -525,6 +593,7 @@ void dartClass() {
 class Car {
   //field
   String engine = "E1001";
+
   // function
   void disp() {
     print(engine);
@@ -532,7 +601,7 @@ class Car {
 }
 
 void dartMultipleInterfaces() {
-  Calculator c = new Calculator ();
+  Calculator c = new Calculator();
   print("The gross total: ${c.ret_total()}");
   print("Discount: ${c.ret_dis()}");
 }
@@ -552,11 +621,11 @@ class Calculator implements Calculator_Total, Calculator_Discount {
 }
 
 class Calculator_Total {
-  int ret_total(){}
+  int ret_total() {}
 }
 
 class Calculator_Discount {
-  int ret_dis(){}
+  int ret_dis() {}
 }
 
 void dartInterface() {
@@ -567,7 +636,6 @@ void dartInterface() {
 
   ConsolePrinter cp = new ConsolePrinter();
   cp.print_data();
-
 }
 
 class ConsolePrinter implements Printer {
@@ -582,16 +650,16 @@ class ConsolePrinter implements Printer {
 }
 
 class Printer {
-  void print_data(){
+  void print_data() {
     print("__Print Data__");
   }
 
-  void print_graphics(){
+  void print_graphics() {
     print("__Print Graphics__");
   }
 }
 
-void dartTypecheck(){
+void dartTypecheck() {
   //  check-type-mismatch.dart:2:10: Error: A value of type 'dart.core::String' can't be assigned to a variable of type 'dart.core::int'.
   //  Try changing the type of the left hand side, or casting the right hand side to 'dart.core::int'.
   //  int m ="not_integer";
@@ -604,8 +672,7 @@ void dartTypecheck(){
   print(n); //prints null
 }
 
-void dartFinalConst(){
-
+void dartFinalConst() {
   final v1 = 13;
   const v2 = 12;
 
@@ -613,7 +680,7 @@ void dartFinalConst(){
   print("Print ${v1}, and ${v2}"); //cool way of print more than one variable
 }
 
-void dartLoop(){
+void dartLoop() {
   //for loop
   outerloop: // This is the label name
 
@@ -648,13 +715,13 @@ void dartLoop(){
   }
 }
 
-void dartParse(){
+void dartParse() {
   //Parsing
   print(num.parse('12'));
   print(num.parse('10.91'));
 }
 
-void dartString(){
+void dartString() {
   String str1 = 'this is a single line string';
   String str2 = "this is a single line string";
   String str3 = '''this 
@@ -671,14 +738,13 @@ void dartString(){
   print(str2);
   print(str3);
   print(str4);
-
 }
 
-void dartTertiaryCondition(){
+void dartTertiaryCondition() {
   // conditional expression
   var a = 10;
   var res =
-  a > 12 ? "value greater than 10" : "value lesser than or equal to 10";
+      a > 12 ? "value greater than 10" : "value lesser than or equal to 10";
   print(res);
 
   // conditional expression
@@ -688,7 +754,7 @@ void dartTertiaryCondition(){
   print(res2);
 }
 
-void dartList(){
+void dartList() {
   //list - fixed and grow able list
 
   var lst = new List(3); //declaring a list
@@ -705,8 +771,7 @@ void dartList(){
   print("${lst2.last} ${lst2.first}"); //lots of property with list
 }
 
-void dartMap(){
-
+void dartMap() {
   //Map Literal
   var details = {'Usrname': 'tom', 'Password': 'pass@123'};
   print(details);
@@ -722,7 +787,7 @@ void dartMap(){
   print(details2);
 }
 
-void dartSymbol(){
+void dartSymbol() {
   /*
   Symbols in Dart are opaque, dynamic string name used in reflecting out metadata
   from a library. Simply put, symbols are a way to store the relationship between
@@ -774,12 +839,11 @@ void reflect_InstanceMethods(Symbol libraryName, Symbol className) {
     if (libMirror.declarations.containsKey(className)) print("found class");
     ClassMirror classMirror = libMirror.declarations[className];
 
-    print("No of instance methods found is ${classMirror.instanceMembers
-        .length}");
+    print(
+        "No of instance methods found is ${classMirror.instanceMembers.length}");
     classMirror.instanceMembers.forEach((s, v) => print(s));
   }
 }
-
 
 void dartRunes() {
   //The String class in the dart:core library provides mechanisms to access runes.
@@ -797,38 +861,30 @@ void dartRunes() {
   dartRunes2();
 }
 
-
-void dartRunes2(){
+void dartRunes2() {
   "A string".runes.forEach((int rune) {
-    var character=new String.fromCharCode(rune);
+    var character = new String.fromCharCode(rune);
     print(character);
   });
 }
 
-enum Status {
-  none,
-  running,
-  stopped,
-  paused
-}
+enum Status { none, running, stopped, paused }
 
-dartEnum(){
+dartEnum() {
   print(Status.values);
   Status.values.forEach((v) => print('value: $v, index: ${v.index}'));
   print('running: ${Status.running}, ${Status.running.index}');
   print('running index: ${Status.values[1]}');
 }
 
-
-dartLambdaFunction(){
+dartLambdaFunction() {
   // Lambda Functions :Lambda functions are a concise mechanism to represent functions.
   // These functions are also called as Arrow functions.
   printMsg();
   print(test());
 }
 
-printMsg()=>
-    print("hello");
+printMsg() => print("hello");
 
-int test()=>123;
+int test() => 123;
 // returning function
