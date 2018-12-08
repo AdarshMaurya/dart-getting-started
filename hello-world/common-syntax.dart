@@ -37,6 +37,21 @@ void main() {
   dartCollectionSet();
   dartCollectionMap();
   dartCollectionQueue();
+  dartCollectionIterator();
+}
+
+void dartCollectionIterator() {
+  //he Iterator class from the dart:core library enables easy collection traversal.
+  // Every collection has an iterator property. This property returns an iterator
+  // that points to the objects in the collection.
+  Queue numQ = new Queue();
+  numQ.addAll([100,200,300]);
+  Iterator iter = numQ.iterator;
+
+  while(iter.moveNext()) {
+    print(iter.current);
+  }
+
 }
 
 void dartCollectionQueue() {
