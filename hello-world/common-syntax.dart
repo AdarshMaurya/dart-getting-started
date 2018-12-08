@@ -73,4 +73,15 @@ void main() {
   print(str2);
   print(str3);
   print(str4);
+
+  // conditional expression
+  var a = 10;
+  var res = a > 12 ? "value greater than 10":"value lesser than or equal to 10";
+  print(res);
+
+  // conditional expression
+  var c = null;
+  var b = 12;
+  var res2 = c ?? b;
+  print(res2);
 }
