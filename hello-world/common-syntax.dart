@@ -3,6 +3,22 @@ import 'dart:mirrors';
 import 'Foo.dart';
 
 void main() {
+
+  dartTypecheck();
+  dartFinalConst();
+  dartLoop();
+  dartParse();
+  dartString();
+  dartTertiaryCondition();
+  dartList();
+  dartMap();
+  dartSymbol();
+  dartRunes();
+  dartEnum;
+  dartLambdaFunction();
+}
+
+void dartTypecheck(){
   //  check-type-mismatch.dart:2:10: Error: A value of type 'dart.core::String' can't be assigned to a variable of type 'dart.core::int'.
   //  Try changing the type of the left hand side, or casting the right hand side to 'dart.core::int'.
   //  int m ="not_integer";
@@ -13,13 +29,18 @@ void main() {
 
   int n;
   print(n); //prints null
+}
+
+void dartFinalConst(){
 
   final v1 = 13;
   const v2 = 12;
 
   //v2 = 12; //Error: Setter not found: 'v2'. v2=12;
   print("Print ${v1}, and ${v2}"); //cool way of print more than one variable
+}
 
+void dartLoop(){
   //for loop
   outerloop: // This is the label name
 
@@ -52,11 +73,15 @@ void main() {
       print("InnerloopC:${j}");
     }
   }
+}
 
+void dartParse(){
   //Parsing
   print(num.parse('12'));
   print(num.parse('10.91'));
+}
 
+void dartString(){
   String str1 = 'this is a single line string';
   String str2 = "this is a single line string";
   String str3 = '''this 
@@ -74,10 +99,13 @@ void main() {
   print(str3);
   print(str4);
 
+}
+
+void dartTertiaryCondition(){
   // conditional expression
   var a = 10;
   var res =
-      a > 12 ? "value greater than 10" : "value lesser than or equal to 10";
+  a > 12 ? "value greater than 10" : "value lesser than or equal to 10";
   print(res);
 
   // conditional expression
@@ -85,7 +113,9 @@ void main() {
   var b = 12;
   var res2 = c ?? b;
   print(res2);
+}
 
+void dartList(){
   //list - fixed and grow able list
 
   var lst = new List(3); //declaring a list
@@ -100,6 +130,9 @@ void main() {
   lst2.add(13);
   print(lst2);
   print("${lst2.last} ${lst2.first}"); //lots of property with list
+}
+
+void dartMap(){
 
   //Map Literal
   var details = {'Usrname': 'tom', 'Password': 'pass@123'};
@@ -114,7 +147,9 @@ void main() {
   details2['Usrname'] = 'admin';
   details2['Password'] = 'admin@123';
   print(details2);
+}
 
+void dartSymbol(){
   /*
   Symbols in Dart are opaque, dynamic string name used in reflecting out metadata
   from a library. Simply put, symbols are a way to store the relationship between
@@ -136,10 +171,6 @@ void main() {
     print("class found..");
 
   reflect_InstanceMethods(lib, clsToSearch);
-  f1();
-  f2();
-  f3();
-  f4();
 }
 
 bool checkIf_classAvailableInlibrary(Symbol libraryName, Symbol className) {
@@ -176,19 +207,25 @@ void reflect_InstanceMethods(Symbol libraryName, Symbol className) {
   }
 }
 
-//The String class in the dart:core library provides mechanisms to access runes.
 
-// Code units in a string can be accessed through their indexes.
-// Returns the 16-bit UTF-16 code unit at the given index.
-f1() {
+void dartRunes() {
+  //The String class in the dart:core library provides mechanisms to access runes.
+
+  // Code units in a string can be accessed through their indexes.
+  // Returns the 16-bit UTF-16 code unit at the given index.
+
   String x = 'Runes';
   print(x.codeUnitAt(0));
   print(x.codeUnits);
 
   Runes input = new Runes(' \u{1f605} ');
   print(new String.fromCharCodes(input));
+
+  dartRunes2();
 }
-f2(){
+
+
+void dartRunes2(){
   "A string".runes.forEach((int rune) {
     var character=new String.fromCharCode(rune);
     print(character);
@@ -202,16 +239,17 @@ enum Status {
   paused
 }
 
-f3(){
+dartEnum(){
   print(Status.values);
   Status.values.forEach((v) => print('value: $v, index: ${v.index}'));
   print('running: ${Status.running}, ${Status.running.index}');
   print('running index: ${Status.values[1]}');
 }
 
-// Lambda Functions :Lambda functions are a concise mechanism to represent functions.
-// These functions are also called as Arrow functions.
-f4(){
+
+dartLambdaFunction(){
+  // Lambda Functions :Lambda functions are a concise mechanism to represent functions.
+  // These functions are also called as Arrow functions.
   printMsg();
   print(test());
 }
