@@ -1,5 +1,5 @@
 void main(){
-  int n = "hello";
+  int n = 10;
   print(n);
 }
 //console outputs:
