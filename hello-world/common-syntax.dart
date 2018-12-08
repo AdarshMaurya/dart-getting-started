@@ -22,6 +22,48 @@ void main() {
   dartClassConstructor();
   dartNamedClassConstructor();
   dartThisInstance();
+  dartGetterAccessorSetterMutators();
+}
+
+void dartGetterAccessorSetterMutators() {
+  Student s1 = new Student();
+
+  s1.stud_age = 1;
+  s1.stud_name = "Tony";
+
+  print(s1.name);
+  print(s1.stud_age);
+  print(s1.age);
+
+  s1.stud_age = 6;
+  print(s1.name);
+  print(s1.age);
+
+}
+
+class Student {
+ String name;
+ int  age;
+
+ void set stud_age(int age){
+   if(age <= 5){
+     print("Age should be greater than 5: ${age}");
+   }else{
+     this.age = age;
+   }
+ }
+
+ int get stud_age{
+   return age;
+ }
+
+ void set stud_name(String name){
+   this.name = name;
+ }
+
+ String get stud_name{
+   return name;
+ }
 }
 
 void dartThisInstance() {
