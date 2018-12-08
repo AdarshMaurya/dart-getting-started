@@ -136,6 +136,8 @@ void main() {
     print("class found..");
 
   reflect_InstanceMethods(lib, clsToSearch);
+  f1();
+  f2();
 }
 
 bool checkIf_classAvailableInlibrary(Symbol libraryName, Symbol className) {
@@ -171,3 +173,23 @@ void reflect_InstanceMethods(Symbol libraryName, Symbol className) {
     classMirror.instanceMembers.forEach((s, v) => print(s));
   }
 }
+
+//The String class in the dart:core library provides mechanisms to access runes.
+
+// Code units in a string can be accessed through their indexes.
+// Returns the 16-bit UTF-16 code unit at the given index.
+f1() {
+  String x = 'Runes';
+  print(x.codeUnitAt(0));
+  print(x.codeUnits);
+
+  Runes input = new Runes(' \u{1f605} ');
+  print(new String.fromCharCodes(input));
+}
+f2(){
+  "A string".runes.forEach((int rune) {
+    var character=new String.fromCharCode(rune);
+    print(character);
+  });
+}
+
