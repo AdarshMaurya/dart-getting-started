@@ -44,6 +44,33 @@ void main() {
   dartExceptionsOnCatchFinallyBlock();
   dartThrowingException();
   dartCustomException();
+  dartTypedef();
+}
+
+void dartTypedef() {
+  ManyOperation oper = Add;
+  oper(10,20);
+  oper = Subtract;
+  oper(30,20);
+  oper = Divide;
+  oper(50,5);
+  Calculators(100, 2, Add);
+  Calculators(100, 2, oper);
+}
+typedef ManyOperation(int firstNo , int secondNo);
+
+Add(int firstNo,int second){
+  print("Add result is ${firstNo+second}");
+}
+Subtract(int firstNo,int second){
+  print("Subtract result is ${firstNo-second}");
+}
+Divide(int firstNo,int second){
+  print("Divide result is ${firstNo/second}");
+}
+Calculators(int a, int b, ManyOperation oper){
+  print("Inside calculator");
+  oper(a,b);
 }
 
 void dartCustomException() {
