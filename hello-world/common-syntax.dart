@@ -1,5 +1,8 @@
-void main() {
+import 'dart:core';
+import 'dart:mirrors';
+import 'Foo.dart';
 
+void main() {
   //  check-type-mismatch.dart:2:10: Error: A value of type 'dart.core::String' can't be assigned to a variable of type 'dart.core::int'.
   //  Try changing the type of the left hand side, or casting the right hand side to 'dart.core::int'.
   //  int m ="not_integer";
@@ -23,9 +26,8 @@ void main() {
   for (var i = 0; i < 5; i++) {
     print("InnerloopA: ${i}");
     innerloop:
-
     for (var j = 0; j < 5; j++) {
-      if (j > 3 ) break ;
+      if (j > 3) break;
 
       // Quit the innermost loop
       if (i == 2) break innerloop;
@@ -38,14 +40,13 @@ void main() {
     }
   }
 
-
   outerloop: // This is the label name
 
   for (var i = 0; i < 3; i++) {
     print("Outerloop:${i}");
 
     for (var j = 0; j < 5; j++) {
-      if (j == 3){
+      if (j == 3) {
         continue outerloop;
       }
       print("InnerloopC:${j}");
@@ -55,7 +56,6 @@ void main() {
   //Parsing
   print(num.parse('12'));
   print(num.parse('10.91'));
-
 
   String str1 = 'this is a single line string';
   String str2 = "this is a single line string";
@@ -76,7 +76,8 @@ void main() {
 
   // conditional expression
   var a = 10;
-  var res = a > 12 ? "value greater than 10":"value lesser than or equal to 10";
+  var res =
+      a > 12 ? "value greater than 10" : "value lesser than or equal to 10";
   print(res);
 
   // conditional expression
@@ -101,7 +102,7 @@ void main() {
   print("${lst2.last} ${lst2.first}"); //lots of property with list
 
   //Map Literal
-  var details = {'Usrname':'tom','Password':'pass@123'};
+  var details = {'Usrname': 'tom', 'Password': 'pass@123'};
   print(details);
 
   //Adding value to Map literals at Runtime
@@ -113,5 +114,60 @@ void main() {
   details2['Usrname'] = 'admin';
   details2['Password'] = 'admin@123';
   print(details2);
-  
+
+  /*
+  Symbols in Dart are opaque, dynamic string name used in reflecting out metadata
+  from a library. Simply put, symbols are a way to store the relationship between
+  a human readable string and a string that is optimized to be used by computers.
+  Reflection is a mechanism to get metadata of a type at runtime like the number
+  of methods in a class, the number of constructors it has or the number of
+  parameters in a function. You can even invoke a method of the type which is
+  loaded at runtime.
+   */
+
+  Symbol lib = new Symbol("foo_lib");
+  //library name stored as Symbol
+
+  Symbol clsToSearch = new Symbol("Foo");
+  // class name stored as Symbol
+
+  if (checkIf_classAvailableInlibrary(lib, clsToSearch))
+    // searches Foo class in foo_lib library
+    print("class found..");
+
+  reflect_InstanceMethods(lib, clsToSearch);
+}
+
+bool checkIf_classAvailableInlibrary(Symbol libraryName, Symbol className) {
+  MirrorSystem mirrorSystem = currentMirrorSystem();
+  LibraryMirror libMirror = mirrorSystem.findLibrary(libraryName);
+
+  if (libMirror != null) {
+    print("Found Library");
+    print("checkng...class details..");
+    print("No of classes found is : ${libMirror.declarations.length}");
+    libMirror.declarations.forEach((s, d) => print(s));
+
+    if (libMirror.declarations.containsKey(className)) return true;
+    return false;
+  }
+}
+
+void reflect_InstanceMethods(Symbol libraryName, Symbol className) {
+  MirrorSystem mirrorSystem = currentMirrorSystem();
+  LibraryMirror libMirror = mirrorSystem.findLibrary(libraryName);
+
+  if (libMirror != null) {
+    print("Found Library");
+    print("checkng...class details..");
+    print("No of classes found is : ${libMirror.declarations.length}");
+    libMirror.declarations.forEach((s, d) => print(s));
+
+    if (libMirror.declarations.containsKey(className)) print("found class");
+    ClassMirror classMirror = libMirror.declarations[className];
+
+    print("No of instance methods found is ${classMirror.instanceMembers
+        .length}");
+    classMirror.instanceMembers.forEach((s, v) => print(s));
+  }
 }
