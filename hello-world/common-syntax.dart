@@ -18,6 +18,52 @@ void main() {
   dartLambdaFunction();
   dartInterface();
   dartMultipleInterfaces();
+  dartClass();
+  dartClassConstructor();
+  dartNamedClassConstructor();
+}
+
+void dartNamedClassConstructor() {
+  Lorry l1 = new Lorry.namedConstructor('L0001');
+}
+
+class Lorry {
+
+  Lorry.namedConstructor(String engine){
+    print("The engine is: ${engine}");
+  }
+
+  Lorry(){
+    print("Non-parameterized constructor invoked");
+  }
+
+
+}
+
+void dartClassConstructor() {
+  Truck t = new Truck('T001');
+}
+
+class Truck {
+  Truck(String engine){
+    print(engine);
+  }
+}
+
+
+
+void dartClass() {
+  Car c = new Car();
+  c.disp();
+}
+
+class Car {
+  //field
+  String engine = "E1001";
+  // function
+  void disp() {
+    print(engine);
+  }
 }
 
 void dartMultipleInterfaces() {
