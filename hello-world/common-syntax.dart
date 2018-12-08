@@ -26,6 +26,22 @@ void main() {
   dartClassInheritance();
   dartClassMultiLevelClassInheritance();
   dartInheritanceMethodOverriding();
+  dartStaticKeyword();
+}
+
+void dartStaticKeyword() {
+  // Initialize the static variable
+  StaticMem.num =12;
+  // Invoke the static method
+  StaticMem.disp();
+
+}
+
+class StaticMem {
+  static int num;
+  static disp(){
+    print("The value of num is ${StaticMem.num}");
+  }
 }
 
 void dartInheritanceMethodOverriding() {
