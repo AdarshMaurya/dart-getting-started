@@ -23,6 +23,49 @@ void main() {
   dartNamedClassConstructor();
   dartThisInstance();
   dartGetterAccessorSetterMutators();
+  dartClassInheritance();
+  dartClassMultiLevelClassInheritance();
+}
+
+void dartClassMultiLevelClassInheritance() {
+  var obj = new Leaf();
+  obj.print_name();
+}
+
+class Leaf extends Child {
+Leaf(){
+  print("Leaf class constructor invoked");
+}
+}
+
+class Child extends Root{
+  Child(){
+    print("Child class constructor invoked");
+  }
+}
+
+class Root {
+  Root(){
+    print("Root class constructor invoked");
+  }
+  void print_name() {
+    print("Calling from the Root Class");
+  }
+}
+
+void dartClassInheritance() {
+  var obj = new Circle();
+  obj.cal_area();
+}
+
+class Circle extends Shape{
+
+}
+
+class Shape {
+  void cal_area() {
+    print("Calling calc area defined in the Shape class");
+  }
 }
 
 void dartGetterAccessorSetterMutators() {
