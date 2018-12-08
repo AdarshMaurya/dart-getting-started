@@ -1,4 +1,5 @@
 import 'dart:core';
+import 'dart:math';
 import 'dart:mirrors';
 import 'Foo.dart';
 
@@ -28,6 +29,64 @@ void main() {
   dartInheritanceMethodOverriding();
   dartStaticKeyword();
   dartSuperKeyword();
+  dartObjectStateBehaviorIdentity();
+}
+
+void dartObjectStateBehaviorIdentity() {
+  ObjectBluePrint obj = new ObjectBluePrint();
+  obj.setHasCode(1);
+  print("Object Identity: ${obj.hashCode}");
+  obj.behavior(true);
+
+  ObjectBluePrint obj2 = new ObjectBluePrint();
+  obj2.setHasCode(2);
+  print("Object Identity: ${obj.hashCode}");
+  obj2.behavior(true);
+
+  if(obj != obj2 ){
+    print("Compare obj and obj2 :");
+    print("obj = ${obj.hashCode}");
+    print("obj2 = ${obj2.hashCode}");
+  }
+
+  ObjectBluePrint obj3 = new ObjectBluePrint();
+  obj3.setHasCode(2);
+  print("Object Identity: ${obj3.hashCode}");
+  obj3.setHasCode(obj3.hashCode);
+  obj3.behavior(true);
+
+  if(obj2 == obj3 ){
+    print("Compare obj2 and obj3 :");
+    print("obj2 = ${obj2.hashCode}");
+    print("obj3 = ${obj3.hashCode}");
+  }
+  print("Compare obj2 and obj2 : ${identical(obj2, obj2)}");
+  print("Compare obj2 and obj3 : ${identical(obj2, obj3)}");
+  print("Compare obj3 and obj3 : ${identical(obj3, obj3)}");
+}
+
+class ObjectBluePrint {
+
+  bool state;
+  int objIdentity;
+
+  void behavior(bool state){
+    print("Lets change state");
+    print("state of boolean state: ${this.state}");
+    this.state = state;
+    print("state changed to ${this.state}");
+  }
+
+  @override
+  int get hashCode {
+    return objIdentity;
+  }
+
+  void setHasCode(int hashCode) {
+    objIdentity = hashCode;
+  }
+
+
 }
 
 void dartSuperKeyword() {
