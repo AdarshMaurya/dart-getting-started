@@ -139,6 +139,7 @@ void main() {
   f1();
   f2();
   f3();
+  f4();
 }
 
 bool checkIf_classAvailableInlibrary(Symbol libraryName, Symbol className) {
@@ -207,3 +208,16 @@ f3(){
   print('running: ${Status.running}, ${Status.running.index}');
   print('running index: ${Status.values[1]}');
 }
+
+// Lambda Functions :Lambda functions are a concise mechanism to represent functions.
+// These functions are also called as Arrow functions.
+f4(){
+  printMsg();
+  print(test());
+}
+
+printMsg()=>
+    print("hello");
+
+int test()=>123;
+// returning function
