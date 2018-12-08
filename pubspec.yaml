@@ -1,0 +1,5 @@
+name: dart_getting_started
+description: A simple tutorial for beginners
+
+dependencies:
+  test: ^1.5.1+1

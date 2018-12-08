@@ -5,6 +5,7 @@ import 'dart:mirrors';
 import 'Foo.dart';
 import 'encapsulate.dart' as web;
 import 'dart:io';
+import 'dartTest.dart';
 
 void main() {
   dartTypecheck();
@@ -50,9 +51,16 @@ void main() {
   dartEncapsulation();
   dartCustomLibrary();
   //dartSyncMethod();
-  dartAsyncMethod();
-  dartConcurrency();
+  //dartAsyncMethod();
+  //dartConcurrency();
+  dartTest();
 
+}
+
+void dartTest() {
+  additionTest();
+  subTest();
+  groupStringTest();
 }
 
 void dartConcurrency() {
