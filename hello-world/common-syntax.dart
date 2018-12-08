@@ -1,6 +1,5 @@
 import 'dart:collection';
 import 'dart:core';
-import 'dart:math';
 import 'dart:mirrors';
 import 'Foo.dart';
 import 'encapsulate.dart' as web;
@@ -47,6 +46,26 @@ void main() {
   dartCustomException();
   dartTypedef();
   dartEncapsulation();
+  dartCustomLibrary();
+
+}
+
+void dartCustomLibrary() {
+Foo foox = new Foo();
+foox.m1();
+foox.m2();
+foox.m3();
+
+var num1 = 10;
+var num2 = 20;
+var sum = add(num1,num2);
+var mod = modulus(num1,num2);
+var r = random(10);
+
+print("$num1 + $num2 = $sum");
+print("$num1 % $num2= $mod");
+print("random no $r");
+
 }
 
 void dartEncapsulation() {
