@@ -17,7 +17,7 @@ void main() {
   //v2 = 12; //Error: Setter not found: 'v2'. v2=12;
   print("Print ${v1}, and ${v2}"); //cool way of print more than one variable
 
-//for loop
+  //for loop
   outerloop: // This is the label name
 
   for (var i = 0; i < 5; i++) {
@@ -84,4 +84,34 @@ void main() {
   var b = 12;
   var res2 = c ?? b;
   print(res2);
+
+  //list - fixed and grow able list
+
+  var lst = new List(3); //declaring a list
+  lst[0] = 12; //initializing a list
+  lst[1] = 13;
+  lst[2] = 11;
+  print(lst);
+
+  //growable list
+  var lst2 = new List();
+  lst2.add(12);
+  lst2.add(13);
+  print(lst2);
+  print("${lst2.last} ${lst2.first}"); //lots of property with list
+
+  //Map Literal
+  var details = {'Usrname':'tom','Password':'pass@123'};
+  print(details);
+
+  //Adding value to Map literals at Runtime
+  details['Uid'] = 'U1oo1';
+  print(details);
+
+  //Map constructor
+  var details2 = new Map();
+  details2['Usrname'] = 'admin';
+  details2['Password'] = 'admin@123';
+  print(details2);
+  
 }
