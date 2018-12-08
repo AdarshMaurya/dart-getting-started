@@ -1,5 +1,6 @@
 import 'dart:collection';
 import 'dart:core';
+import 'dart:isolate';
 import 'dart:mirrors';
 import 'Foo.dart';
 import 'encapsulate.dart' as web;
@@ -48,12 +49,32 @@ void main() {
   dartTypedef();
   dartEncapsulation();
   dartCustomLibrary();
-  dartSyncMethod();
+  //dartSyncMethod();
   dartAsyncMethod();
+  dartConcurrency();
 
 }
 
-void dartAsyncMethod() {
+void dartConcurrency() {
+
+  //There is no guarantee
+  // as to when isolateFoo will be executing
+  // and when main() will be executing.
+
+  Isolate.spawn(isolateFoo,'Hello!!');
+  Isolate.spawn(isolateFoo,'Greetings!!');
+  Isolate.spawn(isolateFoo,'Welcome!!');
+
+  print('execution from main1');
+  print('execution from main2');
+  print('execution from main3');
+}
+
+void isolateFoo(var message){
+  print('execution from foo ... the message is :${message}');
+}
+
+  void dartAsyncMethod() {
   File file = new File( Directory.current.path+"/data/contact.txt");
 
   // returns a future, this is Async method
