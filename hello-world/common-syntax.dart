@@ -3,6 +3,7 @@ import 'dart:core';
 import 'dart:mirrors';
 import 'Foo.dart';
 import 'encapsulate.dart' as web;
+import 'dart:io';
 
 void main() {
   dartTypecheck();
@@ -47,7 +48,24 @@ void main() {
   dartTypedef();
   dartEncapsulation();
   dartCustomLibrary();
+  dartSyncMethod();
 
+}
+
+void dartSyncMethod() {
+
+  //The readLineSync() is a synchronous method. This means that the execution of
+  // all instructions that follow the readLineSync() function call will be blocked till the readLineSync() method finishes execution.
+
+  // prompt for user input
+  print("Enter your name :");
+
+  // this is a synchronous method that reads user input
+  String name = stdin.readLineSync();
+
+
+  print("Hello Mr. ${name}");
+  print("End of main");
 }
 
 void dartCustomLibrary() {
