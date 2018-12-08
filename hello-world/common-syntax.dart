@@ -27,6 +27,33 @@ void main() {
   dartClassMultiLevelClassInheritance();
   dartInheritanceMethodOverriding();
   dartStaticKeyword();
+  dartSuperKeyword();
+}
+
+void dartSuperKeyword() {
+  // The super keyword is used to refer to the immediate parent of a class.
+  // The keyword can be used to refer to the super class version of a variable,
+  // property, or method.
+
+  SuperChild c = new SuperChild();
+  c.print_name("Super Child");
+}
+
+class SuperChild extends SuperParent{
+
+  @override
+  void print_name(String name) {
+    print("Overriding SuperParent print_name:  ${name}");
+    super.print_name(name);
+    print("Print SuperParent msg with super.msg: ${super.msg}");
+  }
+}
+
+class SuperParent {
+  String msg = "message from the parent class.";
+  void print_name(String name){
+    print("Print the Parent Name ${name}");
+  }
 }
 
 void dartStaticKeyword() {
