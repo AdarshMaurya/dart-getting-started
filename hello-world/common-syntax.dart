@@ -21,6 +21,19 @@ void main() {
   dartClass();
   dartClassConstructor();
   dartNamedClassConstructor();
+  dartThisInstance();
+}
+
+void dartThisInstance() {
+  Bike b = new Bike('B001');
+}
+
+class Bike {
+  String engine;
+  Bike(String engine){
+    this.engine = engine;
+    print("The engine is: ${engine}");
+  }
 }
 
 void dartNamedClassConstructor() {
