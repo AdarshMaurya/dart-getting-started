@@ -38,6 +38,66 @@ void main() {
   dartCollectionMap();
   dartCollectionQueue();
   dartCollectionIterator();
+  dartGenericTypeSafeCollection();
+}
+
+void dartGenericTypeSafeCollection() {
+
+  //All Dart collections support type-safety implementation via generics.
+  // A pair of angular brackets containing the data type is used to declare a
+  // type-safe collection.
+
+  //Generic List
+
+  List <String> logTypes = new List <String>();
+  logTypes.add("WARNING");
+  logTypes.add("ERROR");
+  logTypes.add("INFO");
+  //logTypes.add(123); //compilation error
+
+  print("Genric List Default implementation  :${logTypes.runtimeType}");
+
+  // iterating across list
+  for (String type in logTypes) {
+    print(type);
+  }
+
+  //Generic Set
+
+  Set <int>numberSet = new  Set<int>();
+  numberSet.add(100);
+  numberSet.add(20);
+  numberSet.add(5);
+  numberSet.add(60);
+  numberSet.add(70);
+
+   //numberSet.add("Tom");
+  // compilation error;
+  print("Genric Set Default implementation  :${numberSet.runtimeType}");
+
+  for(var no in numberSet) {
+    print(no);
+  }
+
+ //Generic Queue
+  Queue<int> queue = new Queue<int>();
+  print("Generic Queue Default implementation ${queue.runtimeType}");
+  queue.addLast(10);
+  queue.addLast(20);
+  queue.addLast(30);
+  queue.addLast(40);
+  queue.removeFirst();
+
+
+  for(int no in queue){
+    print(no);
+  }
+
+  //Generic Map
+  Map <String,String>map={'name':'Tom','Id':'E1001'};
+  print("Generic map Default implementation ${map.runtimeType}");
+  print('Map :${map}');
+
 }
 
 void dartCollectionIterator() {
