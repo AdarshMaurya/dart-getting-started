@@ -31,6 +31,22 @@ void main() {
   dartSuperKeyword();
   dartObjectStateBehaviorIdentity();
   dartCascadeOperator();
+  dartStringManipulation();
+}
+
+void dartStringManipulation() {
+  //some example
+
+  int num = -8;
+
+  print(num.toString());
+  print(num.toString().substring(0,1));
+
+  print(num.toRadixString(2));
+  print(num.abs());
+  print(num.toUnsigned(2));
+  print(num.round());
+
 }
 
 void dartCascadeOperator() {
