@@ -30,6 +30,29 @@ void main() {
   dartStaticKeyword();
   dartSuperKeyword();
   dartObjectStateBehaviorIdentity();
+  dartCascadeOperator();
+}
+
+void dartCascadeOperator() {
+
+  // Every time a function is called, a reference to the object is required.
+  // The cascade operator can be used as a shorthand in cases where
+  // there is a sequence of invocations.
+
+  new ObjectCascade()
+      ..reference_to_method_one()
+      ..reference_to_method_two();
+}
+
+class ObjectCascade {
+  reference_to_method_one() {
+    print("This is a test method 1");
+  }
+
+  reference_to_method_two() {
+    print("This is a test method 2");
+  }
+
 }
 
 void dartObjectStateBehaviorIdentity() {
