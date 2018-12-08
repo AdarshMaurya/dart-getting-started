@@ -16,6 +16,68 @@ void main() {
   dartRunes();
   dartEnum;
   dartLambdaFunction();
+  dartInterface();
+  dartMultipleInterfaces();
+}
+
+void dartMultipleInterfaces() {
+  Calculator c = new Calculator ();
+  print("The gross total: ${c.ret_total()}");
+  print("Discount: ${c.ret_dis()}");
+}
+
+class Calculator implements Calculator_Total, Calculator_Discount {
+  @override
+  int ret_dis() {
+    // TODO: implement ret_dis
+    return 1000;
+  }
+
+  @override
+  int ret_total() {
+    // TODO: implement ret_total
+    return 50;
+  }
+}
+
+class Calculator_Total {
+  int ret_total(){}
+}
+
+class Calculator_Discount {
+  int ret_dis(){}
+}
+
+void dartInterface() {
+  //An interface defines the syntax that any entity must adhere to.
+  // Interfaces define a set of methods available on an object.
+  // Dart does not have a syntax for declaring interfaces.
+  // Class declarations are themselves interfaces in Dart
+
+  ConsolePrinter cp = new ConsolePrinter();
+  cp.print_data();
+
+}
+
+class ConsolePrinter implements Printer {
+  void print_data() {
+    print("__Printing to console__");
+  }
+
+  @override
+  void print_graphics() {
+    // TODO: implement print_graphics
+  }
+}
+
+class Printer {
+  void print_data(){
+    print("__Print Data__");
+  }
+
+  void print_graphics(){
+    print("__Print Graphics__");
+  }
 }
 
 void dartTypecheck(){
